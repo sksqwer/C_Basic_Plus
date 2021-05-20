@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <vector>
 #include <array>
+#include <cmath>
 
 using namespace std;
 
@@ -344,56 +345,56 @@ using namespace std;
 			2진수 11은 10진수 3입니다.
 */
 
-
-int main()
-{
-
-	// : source code
-
-	int m,k, num = 0;
-	string str, n;
-	cout << "입력 진수: ";
-	cin >> k;
-	cout << "k진수 입력: ";
-	cin >> n;
-	cout << "출력 진수 : ";
-	cin >> m;
-	for (int i = 0; i < n.length(); i++)
-	{
-		num *= k;
-		num += n[i] - '0';
-	}
-
-
-
-
-
-	while (m < 2 || m > 36)
-	{
-		cout << "2 ~ 36 사이의 값을 입력하시오: ";
-		cin >> m;
-	}
-	while (num != 0)
-	{
-		if (num / m != 0)
-			str += ('0' + (num / m));
-		else
-		{
-			str += ('0' + (num % m));
-			break;
-
-		}
-		num %= m;
-
-	}
-
-	cout << str << endl;
-
-
-
-
-
-	return 0;
-
-
-}
+//
+//int main()
+//{
+//
+//	// : source code
+//
+//	int m,k, num = 0;
+//	string str, n;
+//	cout << "입력 진수: ";
+//	cin >> k;
+//	cout << "k진수 입력: ";
+//	cin >> n;
+//	cout << "출력 진수 : ";
+//	cin >> m;
+//	for (int i = 0; i < n.length(); i++)
+//	{
+//		num *= k;
+//		num += n[i] - '0';
+//	}
+//
+//
+//
+//
+//
+//	while (m < 2 || m > 36)
+//	{
+//		cout << "2 ~ 36 사이의 값을 입력하시오: ";
+//		cin >> m;
+//	}
+//	while (num != 0)
+//	{
+//		if (num / m != 0)
+//			str += ('0' + (num / m));
+//		else
+//		{
+//			str += ('0' + (num % m));
+//			break;
+//
+//		}
+//		num %= m;
+//
+//	}
+//
+//	cout << str << endl;
+//
+//
+//
+//
+//
+//	return 0;
+//
+//
+//}

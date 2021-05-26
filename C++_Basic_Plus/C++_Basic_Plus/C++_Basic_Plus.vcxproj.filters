@@ -42,9 +42,21 @@
     <ClCompile Include="account.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="mytime1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="complex0.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="account.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="mytime1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="complex0.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

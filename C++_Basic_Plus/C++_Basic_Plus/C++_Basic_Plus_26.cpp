@@ -174,6 +174,7 @@ bool check_number(char c);
 double Calc(double a, double b, char c);
 int rank_oper(char c);
 void show(stack<char> _a, queue<string> _b, stack<double> _c);
+string change_string(string str);
 
 
 int main()
@@ -192,18 +193,16 @@ int main()
 		queue<string> Postfix_Qu;
 
 		getline(cin, Equation);
+		Equation = change_string(Equation);
 		len = Equation.length();
 		if (Equation == "q" || len == 0)
 			break;
 
 		cout << "------------------------------------------" << endl;
-		cout << "Operator_Stack\t\tOperand_Stack\t\tPostfix_queue" << endl;
+		cout << "Operator_Stack\t\tPostfix_queue\t\tOperand_Stack" << endl;
 
 		for (int i = 0; i < len; i++)
 		{
-			if (Equation[i] == ' ')
-				continue;
-
 			if (Equation[i] == LB)
 				Operator_St.push(Equation[i]);
 			else if (Equation[i] == RB)
@@ -217,10 +216,10 @@ int main()
 
 				Operator_St.pop();
 			}
-			else if (check_number(Equation[i]))
+			else if (check_number(Equation[i]) || (Equation[i] == '-' && check_number(Equation[i+1])))
 			{
 				temp = "";
-				while (check_number(Equation[i]))
+				while (check_number(Equation[i]) || Equation[i] == '.' || (Equation[i] == '-' && check_number(Equation[i + 1])))
 				{
 					temp += Equation[i];
 					i++;
@@ -262,7 +261,7 @@ int main()
 		{
 			temp = Postfix_Qu.front();
 			Postfix_Qu.pop();
-			if (check_number(temp[0]))
+			if (check_number(temp[0]) || (temp[0] == '-' && temp.length() > 1))
 				operand_St.push(stod(temp));
 			else
 			{
@@ -278,6 +277,8 @@ int main()
 
 		}
 
+		cout << "정답 : " << operand_St.top() << endl << endl;
+
 
 		cout << "수학식을 입력하시오(종료 q): ";
 	}
@@ -292,7 +293,7 @@ int main()
 
 bool check_number(char c)
 {
-	if (c >= '0' && c <= '9')
+	if ((c >= '0' && c <= '9'))
 		return true;
 	else
 		return false;
@@ -364,4 +365,29 @@ void show(stack<char> _a, queue<string> _b, stack<double> _c)
 		_c.pop();
 	}
 	cout << endl;
+}
+
+
+string change_string(string str)
+{
+	int len = str.length();
+	string ch = "";
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] == ' ')
+			continue;
+
+		if (str[i] == '-')
+		{
+			if (i != 0 && (check_number(str[i - 1]) || str[i - 1] == ')' ) && check_number(str[i+1]))
+				ch += "+";
+		}
+		ch += str[i];
+
+	}
+
+	cout << ch;
+
+	return ch;
+
 }

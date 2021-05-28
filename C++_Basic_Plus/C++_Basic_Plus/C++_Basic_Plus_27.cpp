@@ -482,60 +482,69 @@ int main()
 		cab
 		cba
 */
+//
+//int factorial(int n);
+//void displayPermutation(const string& s);
+//void recursion(string * s, string ,int n);
+//
+//int main()
+//{
+//	string str;
+//	cin >> str;
+//
+//	displayPermutation(str);
+//
+//	return 0;
+//}
+//
+//
+//void displayPermutation(const string& s)
+//{
+//	string temp, result = "";
+//	int len = s.length();
+//	string *presult = new string[factorial(len)];
+//
+//	recursion(presult, s, 0);
+//
+//	for (int i = 0; i < factorial(len); i++)
+//		cout << presult[i] << endl;
+//
+//	delete[] presult;
+//
+//}
+//
+//
+//int factorial(int n)
+//{
+//	if (n == 0)
+//		return 1;
+//	return factorial(n - 1) * n;
+//}
+//
+//void recursion(string *s, string t, int n)
+//{
+//	int len = t.length();
+//	if (len == 0)
+//		return;
+//	string temp = t;
+//	for (int i = 0; i < len; i++)
+//	{
+//		int m = n;
+//		for (int j = 0; j < factorial(len - 1); j++)
+//		{
+//
+//			s[m] += t[i];
+//			m++;
+//		}
+//		temp = t;
+//		temp.erase(i, 1);
+//		recursion(s, temp, n);
+//		n += factorial(len - 1);
+//	}
+//}
 
-int factorial(int n);
-void displayPermutation(const string& s);
-void recursion(string * s, string ,int n);
 
-int main()
+class StringBad
 {
-	string str;
-	cin >> str;
-
-	displayPermutation(str);
-
-	return 0;
-}
-
-
-void displayPermutation(const string& s)
-{
-	string temp, result = "";
-	int len = s.length();
-	string *presult = new string[factorial(len)];
-
-	recursion(presult, s, 0);
-
-	for (int i = 0; i < factorial(len); i++)
-		cout << presult[i] << endl;
-
-	delete[] presult;
-
-}
-
-
-int factorial(int n)
-{
-	if (n == 0)
-		return 1;
-	return factorial(n - 1) * n;
-}
-
-void recursion(string *s, string t, int n)
-{
-	int len = s[n].length();
-	if (len == 0)
-		return;
-	string temp = t;
-	for (int i = 0; i < len; i++)
-	{
-		for (int j = 0; j < factorial(len - 1); j++)
-		{
-			s[n] += t[i];
-			temp = t;
-			temp.erase(i, 1);
-			recursion(s, temp, n);
-			n++;
-		}
-	}
-}
+	privat
+};

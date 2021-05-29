@@ -364,10 +364,10 @@ using namespace std;
 //	cout << "        \"" << sb << "\"\n";
 //}
 
-
+const int MAX = 987654321;
 int n;
 vector<int> a, b, c;
-void hanoi();
+void hanoi(int pre);
 void show();
 void move(vector<int> &v1, vector<int> &v2);
 bool can_move(const vector<int> &v1, const vector<int> &v2, const vector<int> &v3);
@@ -382,39 +382,132 @@ int main()
 	cout << b.size() << endl;
 
 	show();
-	hanoi();
+	hanoi(2);
 
 
 	return 0;
 
 }
 
-void hanoi()
+void hanoi(int pre)
 {
 	if (n == 0)
 		return;
 
 	if (c.size() == n)
 		return;
+	
+	vector<int> *pl, *pr;
+	int ta = MAX, tb = MAX, tc = MAX;
 
-	int at, bt, ct;
+	if (pre == 0)
+	{
+		if (!b.empty())
+			tb = b.front();
 
-	if (n % 2 && b.empty() && c.empty())
-		move(a, c);
+		if (!c.empty())
+			tc = c.front();
+
+		if (tb < tc)
+		{
+			if (b.size() % 2)
+			{
+				move(b, c);
+				pre = 2;
+			}
+			else
+			{
+				move(b, a);
+				pre = 0;
+			}
+		}
+		else
+		{
+			if (c.size() % 2)
+			{
+				move(c, b);
+				pre = 1;
+			}
+			else
+			{
+				move(c, a);
+				pre = 0;
+			}
+		}
+	}
+	else if (pre == 1)
+	{
+		if (!a.empty())
+			ta = a.front();
+
+		if (!c.empty())
+			tc = c.front();
+
+		if (ta < tc)
+		{
+			if (a.size() % 2)
+			{
+				move(a, c);
+				pre = 2;
+			}
+			else
+			{
+				move(a, b);
+				pre = 1;
+			}
+		}
+		else
+		{
+			if (c.size() % 2)
+			{
+				move(c, b);
+				pre = 1;
+			}
+			else
+			{
+				move(c, a);
+				pre = 0;
+			}
+		}
+	}
 	else
-		move(a, b);
+	{
+		if (!a.empty())
+			ta = a.front();
 
+		if (!b.empty())
+			tb = b.front();
 
-
-	
-	
-
+		if (ta < tb)
+		{
+			if (a.size() % 2)
+			{
+				move(a, c);
+				pre = 2;
+			}
+			else
+			{
+				move(a, b);
+				pre = 1;
+			}
+		}
+		else
+		{
+			if (b.size() % 2)
+			{
+				move(b, c);
+				pre = 2;
+			}
+			else
+			{
+				move(b, a);
+				pre = 0;
+			}
+		}
+	}
 
 	show();
-
-	while (!_getch()) {};
-
-	hanoi();
+	hanoi(pre);
 
 	return;
 

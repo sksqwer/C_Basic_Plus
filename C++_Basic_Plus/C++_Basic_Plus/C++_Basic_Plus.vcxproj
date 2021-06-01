@@ -184,8 +184,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Circle2D.cpp" />
     <ClCompile Include="complex0.cpp" />
     <ClCompile Include="hanoi.cpp" />
+    <ClCompile Include="MyPoint.cpp" />
     <ClCompile Include="mytime1.cpp" />
     <ClCompile Include="C++_Basic_Plus_27.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -195,13 +197,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Rectangle2D.cpp" />
     <ClCompile Include="StringBad.cpp" />
+    <ClCompile Include="C++_Basic_Plus_6_01.cpp" />
+    <ClCompile Include="tabtenn0.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="account.h" />
+    <ClInclude Include="Circle2D.h" />
     <ClInclude Include="complex0.h" />
+    <ClInclude Include="MyPoint.h" />
     <ClInclude Include="mytime1.h" />
+    <ClInclude Include="Rectangle2D.h" />
     <ClInclude Include="StringBad.h" />
+    <ClInclude Include="tabtenn0.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

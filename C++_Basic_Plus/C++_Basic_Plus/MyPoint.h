@@ -22,5 +22,4 @@ public:
 	bool isIn(Rectangle2D &);
 };
 
-
 #endif // !MYPOINT_H

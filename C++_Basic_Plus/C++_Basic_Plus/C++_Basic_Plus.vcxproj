@@ -213,13 +213,23 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StringBad.cpp" />
     <ClCompile Include="C++_Basic_Plus_6_01.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="tabtenn0.cpp" />
-    <ClCompile Include="C++_Basic_Plus_6_02.cpp" />
+    <ClCompile Include="C++_Basic_Plus_6_02.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="C++_Basic_Plus_6_03.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="C++_Basic_Plus_6_04.cpp" />
+    <ClCompile Include="Worker0.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="account.h" />
@@ -234,8 +244,10 @@
     <ClInclude Include="MyPoint.h" />
     <ClInclude Include="mytime1.h" />
     <ClInclude Include="Rectangle2D.h" />
+    <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StringBad.h" />
     <ClInclude Include="tabtenn0.h" />
+    <ClInclude Include="Worker0.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

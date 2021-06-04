@@ -11,11 +11,14 @@
 #include <fstream>
 #include <stack>
 #include <queue>
+#include <ctime>
 
 #include "StringBad.h"
 #include "tabtenn0.h" 
 #include "AcctABC.h"
 #include "GeometricObject.h"
+#include "Stopwatch.h"
+
 using namespace std;
 
 //
@@ -209,24 +212,39 @@ using namespace std;
 
 void swap(int *, int *);
 void print(int [], int, int, bool);
-void _set(int*);
+void _set(int*, int*);
 void sort1(int*, int);
 void sort2(int *, int );
 void sort3(int *, int );
+void arrcpy(int *arr, int *arr2, int size);
+void makearr(int *arr, const int size);
 
 int main()
 {
-	const int size = 7;
-	int arr[size];
+	const int size = 10000;
+	int *arr = new int[size];
+	int *arr2 = new int[size];
+	StopWatch T;
 
-	_set(arr);
+	makearr(arr, size);
+
+	arrcpy(arr2, arr, size);
+	T.start();
 	sort1(arr, size);
+	T.stop();
+	cout << T.getElapsedTime() << "ms 걸림\n";
 
-	_set(arr);
+	arrcpy(arr, arr2, size);
+	T.start();
 	sort2(arr, size);
+	T.stop();
+	cout << T.getElapsedTime() << "ms 걸림\n";
 
-	_set(arr);
+	arrcpy(arr, arr2, size);
+	T.start();
 	sort3(arr, size);
+	T.stop();
+	cout << T.getElapsedTime() << "ms 걸림\n";
 
 	return 0;
 }
@@ -247,18 +265,18 @@ void sort1(int *arr, int size)
 	int compare = 0, nswap = 0;
 	for (int i = 0; i < size; i++)
 	{
-		cout << " 패스" << i + 1 << endl;
+//		cout << " 패스" << i + 1 << endl;
 		for (int j = size - 1; j > i; j--)
 		{
 			compare++;
 			if (arr[j] < arr[j - 1])
 			{
 				nswap++;
-				print(arr, size, j - 1, true);
+//				print(arr, size, j - 1, true);
 				swap(&arr[j], &arr[j - 1]);
 			}
-			else
-				print(arr, size, j - 1, false);
+//			else
+//				print(arr, size, j - 1, false);
 		}
 	}
 
@@ -274,18 +292,18 @@ void sort2(int *arr, int size)
 	for (int i = 0; i < size; i++)
 	{
 		int temp = nswap;
-		cout << " 패스" << i + 1 << endl;
+//		cout << " 패스" << i + 1 << endl;
 		for (int j = size - 1; j > i; j--)
 		{
 			compare++;
 			if (arr[j] < arr[j - 1])
 			{
 				nswap++;
-				print(arr, size, j - 1, true);
+//				print(arr, size, j - 1, true);
 				swap(&arr[j], &arr[j - 1]);
 			}
-			else
-				print(arr, size, j - 1, false);
+//			else
+//				print(arr, size, j - 1, false);
 		}
 		if (nswap == temp)
 			break;
@@ -303,19 +321,19 @@ void sort3(int *arr, int size)
 	for (int i = 0; i < size; i++)
 	{
 		int temp = size - 1;
-		cout << " 패스" << i + 1 << endl;
+//		cout << " 패스" << i + 1 << endl;
 		for (int j = size - 1; j > i; j--)
 		{
 			compare++;
 			if (arr[j] < arr[j - 1])
 			{
 				nswap++;
-				print(arr, size, j - 1, true);
+//				print(arr, size, j - 1, true);
 				swap(&arr[j], &arr[j - 1]);
 				temp = j - 1;
 			}
-			else
-				print(arr, size, j - 1, false);
+//			else
+//				print(arr, size, j - 1, false);
 		}
 		i = temp;
 	}
@@ -351,4 +369,57 @@ void swap(int *a, int *b)
 	int temp = *a;
 	*a = *b;
 	*b = temp;
+}
+
+void arrcpy(int *arr, int *arr2, int size)
+{
+	for (int i = 0; i < size; i++)
+		arr[i] = arr2[i];
+}
+
+
+void makearr(int *arr, const int size)
+{
+	bool *ch = new bool[size];
+	memset(ch, false, sizeof(bool) * size);
+	int ran;
+	srand((unsigned long long)time(NULL));
+	StopWatch T;
+	bool late = true;
+	for (int i = 0; i < size; i++)
+	{
+		ran = rand() % size;
+		if (!ch[ran])
+		{
+			ch[ran] = true;
+			arr[i] = ran;
+		}
+		else
+		{
+			if (T.getElapsedTime() > 1000)
+			{
+				for (int j = 0; j < size; j++)
+					if (!ch[j])
+					{
+						arr[i] = j;
+						ch[j] = true;
+					}
+				late = true;
+			}
+			else
+			{
+				if (late)
+				{
+					T.start();
+					late = false;
+				}
+
+				i--;
+			}
+		}
+		T.stop();
+	}
+
+
+	delete[] ch;
 }

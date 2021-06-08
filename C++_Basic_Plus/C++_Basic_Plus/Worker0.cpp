@@ -12,6 +12,7 @@ void Worker::Data() const
 
 void Worker::Get()
 {
+	cin.get();
 	getline(cin, fullname);
 	cout << "사원 번호를 입력하십시오: ";
 	cin >> id;

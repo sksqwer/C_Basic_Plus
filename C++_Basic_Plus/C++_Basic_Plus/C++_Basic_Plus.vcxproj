@@ -193,6 +193,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="C++_Basic_Plus_6_09.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Circle2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -217,7 +221,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="sort.cpp" />
+    <ClCompile Include="sort.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StringBad.cpp" />
     <ClCompile Include="C++_Basic_Plus_6_01.cpp">
@@ -237,6 +244,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Tv.cpp" />
     <ClCompile Include="Worker0.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +259,13 @@
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="MyPoint.h" />
     <ClInclude Include="mytime1.h" />
+    <ClInclude Include="Queuetp.h" />
     <ClInclude Include="Rectangle2D.h" />
     <ClInclude Include="Stacktp.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StringBad.h" />
     <ClInclude Include="tabtenn0.h" />
+    <ClInclude Include="Tv.h" />
     <ClInclude Include="Worker0.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -105,6 +105,12 @@
     <ClCompile Include="sort.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="C++_Basic_Plus_6_09.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Tv.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="account.h">
@@ -147,6 +153,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Stacktp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Tv.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Queuetp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

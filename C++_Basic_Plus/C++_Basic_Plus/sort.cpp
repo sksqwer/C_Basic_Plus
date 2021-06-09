@@ -30,41 +30,26 @@ void selectionsort1(int *, const int);
 void selectionsort2(int *, const int);
 void Straight_Insertionsort(int *, const int);
 void shell_sort(int *, const int);
+void Quick_sort(int *, const int, const int, const int);
 void print(int arr[], int size, int n, int s);
 void arrcpy(int *, const int *, int);
 
 int main()
 {
-	const int size = 10000;
+	const int size = 50000;
 	int *arr = new int[size];
+//	int arr[10] = { 1, 2, 3, 4, 5,  0, 6, 7, 8, 9 };
 	int *arr2 = new int[size];
 	makearr(arr, size);
 	arrcpy(arr2, arr, size);
 	StopWatch T;
 
-	cout << "sort갯수: " << size << endl;
-
-	/*cout << "초기: ";
+	cout << "sort 갯수: " << size << endl;
+/*
+	cout << "초기: ";
 	for (int i = 0; i < size; i++)
 		cout << arr[i] << " ";
 	cout << endl;*/
-
-	/*int rp = 0;
-	bool ch = false;
-	cout << rp << "중복" << endl;
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = i + 1; j < size; j++)
-		{
-			if (arr[i] == arr[j])
-			{
-				ch = true;
-				++rp;
-			}
-		}
-	}
-	if (ch)
-		cout << rp << "중복" << endl;*/
 
 	cout << endl << "bubblesort1" << endl;
 	arrcpy(arr, arr2, size);
@@ -74,6 +59,7 @@ int main()
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
 
+
 	cout << endl << "bubblesort2" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
@@ -82,6 +68,7 @@ int main()
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
 
+
 	cout << endl << "bubblesort3" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
@@ -89,6 +76,7 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+
 
 	cout << endl << "selectionsort1" << endl;
 	arrcpy(arr, arr2, size);
@@ -107,6 +95,7 @@ int main()
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
 
+
 	cout << endl << "Straight_Insertionsort" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
@@ -115,7 +104,8 @@ int main()
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
 
-	cout << endl << "Shell_sort" << endl;
+
+	cout << endl << "shell_sort" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
 	shell_sort(arr, size);
@@ -123,14 +113,22 @@ int main()
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
 
-	//cout << "정렬 후: ";
-	//for (int i = 0; i < size; i++)
-	//	cout << arr[i] << " ";
-	//cout << endl;
+
+	cout << endl << "Quick_sort" << endl;
+	arrcpy(arr, arr2, size);
+	T.start();
+	Quick_sort(arr, 0, size - 1, size);
+	T.stop();
+
+	cout << T.getElapsedTime() << "ms 걸림\n";
+/*
+	cout << "정렬 후: ";
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;*/
 
 	return 0;
 }
-
 
 void bubblesort1(int *arr, int size)
 {
@@ -309,6 +307,32 @@ void shell_sort(int *arr, const int size)
 	}
 
 }
+
+void Quick_sort(int *arr,const int l,const int r,const int size)
+{
+	int pl = l, pr = r;
+
+	int p = (pl + pr) / 2;
+	while (pl <= pr)
+	{
+		while (arr[pl] < arr[p]) pl++;
+		while (arr[pr] > arr[p]) pr--;
+		if (pl <= pr)
+		{
+//			print(arr, size, pl, pr);
+			swap(arr[pl], arr[pr]);
+			pl++;
+			pr--;
+		}
+	}
+	if (l < pr) Quick_sort(arr, l, pr, size);
+	if (r > pl) Quick_sort(arr, pl, r, size);
+
+
+}
+
+
+
 
 void swap(int *a, int *b)
 {

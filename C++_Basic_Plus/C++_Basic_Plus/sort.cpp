@@ -31,8 +31,11 @@ void selectionsort2(int *, const int);
 void Straight_Insertionsort(int *, const int);
 void shell_sort(int *, const int);
 void Quick_sort(int *, const int, const int, const int);
+void merge_sort(int *, int *, int, int, int, int, const int);
 void print(int arr[], int size, int n, int s);
+void printarr(int *arr,int, int, int, int, int size);
 void arrcpy(int *, const int *, int);
+
 
 int main()
 {
@@ -45,8 +48,8 @@ int main()
 	StopWatch T;
 
 	cout << "sort 갯수: " << size << endl;
-/*
-	cout << "초기: ";
+
+	/*cout << "초기: ";
 	for (int i = 0; i < size; i++)
 		cout << arr[i] << " ";
 	cout << endl;*/
@@ -121,11 +124,25 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
-/*
-	cout << "정렬 후: ";
-	for (int i = 0; i < size; i++)
-		cout << arr[i] << " ";
-	cout << endl;*/
+
+	cout << endl << "Merge_sort" << endl;
+	int *arr3 = new int[size];
+	arrcpy(arr3, arr2, size);
+	memset(arr, 0, sizeof(int) * size);
+	T.start();
+	merge_sort(arr, arr3, 0, (size - 1) / 2, (size - 1) / 2 + 1, size - 1, size);
+	T.stop();
+
+	cout << T.getElapsedTime() << "ms 걸림\n";
+
+	//cout << "정렬 후: ";
+	//for (int i = 0; i < size; i++)
+	//	cout << arr[i] << " ";
+	//cout << endl;
+
+	delete[] arr;
+	delete[] arr2;
+	delete[] arr3;
 
 	return 0;
 }
@@ -331,6 +348,43 @@ void Quick_sort(int *arr,const int l,const int r,const int size)
 
 }
 
+void merge_sort(int *res, int *arr, int ll , int lr, int rl, int rr, const int size)
+{
+	int n = ll;
+	const int _ll = ll, _lr = lr, _rl = rl, _rr = rr;
+	int l = (ll + lr) / 2, r = (lr + rr) / 2;
+	if (ll != lr)
+		merge_sort(res, arr, ll, l, l + 1, lr, size);
+	if(rl != rr)
+		merge_sort(res, arr, rl, r, r + 1, rr, size);
+
+	while (ll <= lr && rl <= rr)
+	{
+		if (arr[ll] <= arr[rl])
+		{
+			res[n++] = arr[ll++];
+//			printarr(res, _ll, _lr, _rl, _rr, size);
+		}
+		else
+		{
+			res[n++] = arr[rl++];
+//			printarr(res, _ll, _lr, _rl, _rr, size);
+		}
+	}
+	while (ll <= lr)
+	{
+		res[n++] = arr[ll++];
+//		printarr(res, _ll, _lr, _rl, _rr, size);
+	}
+	while (rl <= rr)
+	{
+		res[n++] = arr[rl++];
+//		printarr(res, _ll, _lr, _rl, _rr, size);
+	}
+	for (int i = _ll; i <= _rr; i++)
+		arr[i] = res[i];
+}
+
 
 
 
@@ -416,8 +470,29 @@ void print(int arr[], int size, int n, int s)
 
 }
 
+void printarr(int *arr,int ll, int lr, int rl, int rr, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (i == ll || i == rl)
+			cout << "<";
+		else if (i == lr || i == rr)
+			cout << ">";
+		else
+			cout << " ";
+		cout << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
 void arrcpy(int *arr, const int *arr2, int size)
 {
 	for (int i = 0; i < size; i++)
 		arr[i] = arr2[i];
 }
+

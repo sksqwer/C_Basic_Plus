@@ -32,16 +32,21 @@ void Straight_Insertionsort(int *, const int);
 void shell_sort(int *, const int);
 void Quick_sort(int *, const int, const int, const int);
 void merge_sort(int *, int *, int, int, int, int, const int);
+void heap_sort(int *, const int);
+void make_heap(int *arr, const int size);
+void down_heap(int *arr, int n, const int size);
 void print(int arr[], int size, int n, int s);
+void printquick(int arr[], int size, int n, int s, int);
 void printarr(int *arr,int, int, int, int, int size);
 void arrcpy(int *, const int *, int);
+bool check_complete(int *, const int);
 
 
 int main()
 {
-	const int size = 50000;
+	const int size = 100000000;
 	int *arr = new int[size];
-//	int arr[10] = { 1, 2, 3, 4, 5,  0, 6, 7, 8, 9 };
+//	int arr[10] = { 0,1,4,3,8,9,6,2,5,7};
 	int *arr2 = new int[size];
 	makearr(arr, size);
 	arrcpy(arr2, arr, size);
@@ -53,7 +58,7 @@ int main()
 	for (int i = 0; i < size; i++)
 		cout << arr[i] << " ";
 	cout << endl;*/
-
+/*
 	cout << endl << "bubblesort1" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
@@ -61,7 +66,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
-
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 	cout << endl << "bubblesort2" << endl;
 	arrcpy(arr, arr2, size);
@@ -70,6 +76,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 
 	cout << endl << "bubblesort3" << endl;
@@ -79,6 +87,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 
 	cout << endl << "selectionsort1" << endl;
@@ -88,6 +98,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 
 	cout << endl << "selectionsort2" << endl;
@@ -97,6 +109,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 
 	cout << endl << "Straight_Insertionsort" << endl;
@@ -106,6 +120,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 
 	cout << endl << "shell_sort" << endl;
@@ -115,8 +131,10 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
-
+*/
 	cout << endl << "Quick_sort" << endl;
 	arrcpy(arr, arr2, size);
 	T.start();
@@ -124,6 +142,8 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 	cout << endl << "Merge_sort" << endl;
 	int *arr3 = new int[size];
@@ -134,6 +154,19 @@ int main()
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
+
+	cout << endl << "heap_Sort" << endl;
+	arrcpy(arr, arr2, size);
+	T.start();
+	make_heap(arr, size);
+	heap_sort(arr, size);
+	T.stop();
+
+	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
 
 	//cout << "정렬 후: ";
 	//for (int i = 0; i < size; i++)
@@ -330,13 +363,14 @@ void Quick_sort(int *arr,const int l,const int r,const int size)
 	int pl = l, pr = r;
 
 	int p = (pl + pr) / 2;
+	int x = arr[p];
 	while (pl <= pr)
 	{
-		while (arr[pl] < arr[p]) pl++;
-		while (arr[pr] > arr[p]) pr--;
+		while (arr[pl] < x) pl++;
+		while (arr[pr] > x) pr--;
 		if (pl <= pr)
 		{
-//			print(arr, size, pl, pr);
+//			printquick(arr, size, pl, pr, p);
 			swap(arr[pl], arr[pr]);
 			pl++;
 			pr--;
@@ -383,6 +417,57 @@ void merge_sort(int *res, int *arr, int ll , int lr, int rl, int rr, const int s
 	}
 	for (int i = _ll; i <= _rr; i++)
 		arr[i] = res[i];
+}
+
+void heap_sort(int *arr,const int size)
+{
+	for (int i = size - 1; i > 0; i--)
+	{
+		swap(arr[0], arr[i]);
+		down_heap(arr, 0, i);
+	}
+
+}
+
+void make_heap(int *arr, const int size)
+{
+	int paren;
+	for (int i = size - 1; i > 0; i--)
+	{
+		paren = (i % 2) ? i / 2 : i / 2 - 1;
+
+		if (arr[i] > arr[paren])
+		{
+			swap(arr[i], arr[paren]);
+			down_heap(arr, i, size);
+		}
+
+	}
+}
+void down_heap(int * arr, int n, const int size)
+{
+	int paren = n;
+	int child1, child2;
+	int max;
+	while (1)
+	{
+		child1 = 2 * paren + 1;
+		child2 = 2 * paren + 2;
+		max = paren;
+		
+		if (child1 < size && arr[max] < arr[child1])
+			max = child1;
+		if (child2 < size && arr[max] < arr[child2])
+			max = child2;
+
+		if (max != paren)
+		{
+			swap(arr[paren], arr[max]);
+			paren = max;
+		}
+		else
+			return;
+	}
 }
 
 
@@ -470,6 +555,27 @@ void print(int arr[], int size, int n, int s)
 
 }
 
+void printquick(int arr[], int size, int n, int s, int p)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (i == n)
+			cout << "<";
+		else if (i == s)
+			cout << ">";
+		else if (i == p)
+			cout << "*";
+		else
+			cout << " ";
+		cout << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
 void printarr(int *arr,int ll, int lr, int rl, int rr, int size)
 {
 	for (int i = 0; i < size; i++)
@@ -488,6 +594,15 @@ void printarr(int *arr,int ll, int lr, int rl, int rr, int size)
 		cout << arr[i] << " ";
 	}
 	cout << endl;
+}
+
+bool check_complete(int *arr, const int size)
+{
+	bool ch = true;
+	for (int i = 0; i < size - 1; i++)
+		if (arr[i] > arr[i + 1])
+			ch = false;
+	return ch;
 }
 
 void arrcpy(int *arr, const int *arr2, int size)

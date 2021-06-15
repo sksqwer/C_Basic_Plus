@@ -35,6 +35,7 @@ void merge_sort(int *, int *, int, int, int, int, const int);
 void heap_sort(int *, const int);
 void make_heap(int *arr, const int size);
 void down_heap(int *arr, int n, const int size);
+void distribution_sort(int *, const int);
 void print(int arr[], int size, int n, int s);
 void printquick(int arr[], int size, int n, int s, int);
 void printarr(int *arr,int, int, int, int, int size);
@@ -44,9 +45,9 @@ bool check_complete(int *, const int);
 
 int main()
 {
-	const int size = 100000000;
+	const int size = 1000000;
 	int *arr = new int[size];
-//	int arr[10] = { 0,1,4,3,8,9,6,2,5,7};
+//	int arr[10] = { 0,1,1,3,3,9,9,2,5,7};
 	int *arr2 = new int[size];
 	makearr(arr, size);
 	arrcpy(arr2, arr, size);
@@ -162,6 +163,16 @@ int main()
 	T.start();
 	make_heap(arr, size);
 	heap_sort(arr, size);
+	T.stop();
+
+	cout << T.getElapsedTime() << "ms 걸림\n";
+	if (!check_complete(arr, size))
+		cout << "실패!" << endl;
+
+	cout << endl << "distribution_sort" << endl;
+	arrcpy(arr, arr2, size);
+	T.start();
+	distribution_sort(arr, size);
 	T.stop();
 
 	cout << T.getElapsedTime() << "ms 걸림\n";
@@ -533,6 +544,45 @@ void makearr(int *arr, const int size)
 		int ran = rand() % size;
 		swap(arr[i], arr[ran]);
 	}
+}
+
+void distribution_sort(int *arr, const int size)
+{
+	int max = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (max < arr[i])
+			max = arr[i];
+	}
+	int *disarr = new int[max + 1];
+	memset(disarr, 0, sizeof(int) * (max + 1));
+
+	for (int i = 0; i < size; i++)
+		disarr[arr[i]]++;
+
+	int cur = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (disarr[cur] == 0)
+		{
+			cur++;
+			i--;
+		}
+		else
+		{
+			while (disarr[cur] != 0)
+			{
+				arr[i] = cur;
+				disarr[cur]--;
+				if (disarr[cur] != 0)
+					i++;
+			}
+			cur++;
+		}
+	}
+
+	delete[] disarr;
 }
 
 void print(int arr[], int size, int n, int s)

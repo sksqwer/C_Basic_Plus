@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include <Windows.h>
+#include <limits>
 
 #include "Stopwatch.h"
 
@@ -10,6 +11,7 @@ using namespace std;
 int Brute_Force_Method(string, string);
 int KMP(string, string);
 int Boyer_Moore(string, string);
+int Boyer_Moore2(string, string);
 
 
 void print(string , string, const int, const int, const int);
@@ -18,28 +20,38 @@ int main()
 {
 	int kmp_res = -1, By_res = -1;
 	string str1, str2;
-	int n = 100000;
+	int n = 1000000;
 	int count = 0;
 	while (1)
 	{
-		if (count == 1) break;
+		if (count == 10) break;
 		srand((unsigned int)time(NULL));
 //		const int n = 100;
 		str1 = "", str2 = "";
 		int cmp;
-//			str1 = "DACDACBAADBECEEBABCBB";
+//			str1 = "ABABABAA";
 		//	str1 = "BDBDEDEABCECDECEABCEADBABCEBDECBECEEAAEEEECEBBAACB";
 //			n = str1.length();
 		for (int i = 0; i < n; i++)
-			str1 += 'A' + (rand() % 5);
+			str1 += 'A' + (rand() % 2);
 
-		//	for (int i = 0; i < n; i++)
-		//		str1 += 'A';
-		//	str1[n - 1] = 'B';
+		//char temp;
+		//int random;
+		//for (int i = 0; i < n; i++)
+		//{
+		//	random = rand() % n;
+		//	temp = str1[i];
+		//	str1[i] = str1[random];
+		//	str1[random] = temp;
+		//}
+
+//			for (int i = 0; i < n; i++)
+//				str1 += 'A';
+//			str1[n - 1] = 'B';
 		//	str2 = "ABCAABDF";
-		for (int i = 0; i < 5; i++)
-			str2 += 'A' + (rand() % 5);
-//			str2 = "BABB";
+		for (int i = 0; i < 3; i++)
+			str2 += 'A' + (rand() % 2);
+//			str2 = "ABAA";
 
 
 
@@ -72,9 +84,12 @@ int main()
 		//cout << stopw.getElapsedTime() << "ms" << endl;
 
 		By_res = Boyer_Moore(str1, str2);
-		kmp_res = KMP(str1, str2);
+//		kmp_res = KMP(str1, str2);
 		int Bruse_res = -1;
-		if (By_res != kmp_res && By_res != Bruse_res && Bruse_res != kmp_res)
+		//if (By_res != kmp_res && By_res != Bruse_res && Bruse_res != kmp_res)
+		//if(1)
+		
+		if(1)
 		{
 			cout << count << endl;
 			count++;
@@ -98,6 +113,13 @@ int main()
 			cout << Boyer_Moore(str1, str2) << endl;
 			stopw.stop();
 			cout << stopw.getElapsedTime() << "ms" << endl;
+
+			cout << "Boyer_Moore2" << endl;
+			stopw.start();
+			cout << Boyer_Moore2(str1, str2) << endl;
+			stopw.stop();
+			cout << stopw.getElapsedTime() << "ms" << endl;
+			
 		}
 		Sleep(1000);
 	}
@@ -336,3 +358,60 @@ for (int i = 0; i < len1; i++)
 }
 
 return -1;*/
+
+
+
+int Boyer_Moore2(string str1, string str2)
+{
+	int len1 = str1.length(), len2 = str2.length();
+	int res = 0, cmp, itr = len2 - 1;
+	bool ch = false;
+	int *skip = new int[UCHAR_MAX];
+
+	for (int i = 0; i < UCHAR_MAX; i++)
+		skip[i] = len2;
+
+	for (int i = 0; i < len2 - 1; i++)
+		skip[str2[i]] = i;
+	itr = len2 - 1;
+	int cp = len2 - 1;
+	int skip_temp = 0;
+	while (itr < len1)
+	{
+		ch = false;
+		cp = len2 - 1;
+		int itr2 = itr;
+//		print(str1, str2, itr, cp, itr2);
+		while (str2[cp] == str1[itr])
+		{
+//			cout << "itr: " << itr << "cp: " << cp << endl;
+//			print(str1, str2, itr, cp, itr2);
+			if (cp == 0)
+			{
+				delete[] skip;
+				return itr;
+			}
+			itr--;
+			cp--;
+		}
+		skip_temp = skip[str2[cp]];
+		if (skip_temp == len2) // 패턴에 없는 문자일경우
+			itr += skip_temp;
+		else
+		{
+			if (skip_temp > cp) //
+			{
+				itr += cp - skip_temp;
+			}
+			else
+			{
+				itr += len2 - cp;
+			}
+		}
+	}
+
+
+	delete[] skip;
+
+	return -1;
+}

@@ -158,7 +158,10 @@
     <ClCompile Include="AcctABC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Algorithm_CH10.cpp" />
+    <ClCompile Include="Algorithm_CH10.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Algorithm_CH11.cpp" />
     <ClCompile Include="Algorithm_CH8.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -242,6 +245,7 @@
     <ClCompile Include="complex0.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
     <ClCompile Include="hanoi.cpp" />
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="MyPoint.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -316,6 +320,7 @@
     <ClInclude Include="Circle2D.h" />
     <ClInclude Include="complex0.h" />
     <ClInclude Include="GeometricObject.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MyPoint.h" />
     <ClInclude Include="mytime1.h" />

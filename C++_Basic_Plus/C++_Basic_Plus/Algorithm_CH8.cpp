@@ -83,7 +83,7 @@ int main()
 		//stopw.stop();
 		//cout << stopw.getElapsedTime() << "ms" << endl;
 
-		By_res = Boyer_Moore(str1, str2);
+//		By_res = Boyer_Moore(str1, str2);
 //		kmp_res = KMP(str1, str2);
 		int Bruse_res = -1;
 		//if (By_res != kmp_res && By_res != Bruse_res && Bruse_res != kmp_res)
@@ -184,24 +184,23 @@ int KMP(string str1, string str2)
 
 		if (str2[i] == str2[0] && itr == 0) // 
 		{
-			skip[i] = 1;
-			itr++;
+			skip[i] = ++itr;
 		}
 		else if (itr > 0 && str2[i] == str2[itr])
 		{
-			skip[i] = skip[i - 1] + 1;
-			itr++;
+			skip[i] = ++itr;
 		}
 		else
 		{
 			itr = 0;
 			skip[i] = 0;
+			i--;
 		}
 	}
 
 	int res, cmp;
 	itr = 1;
-	for (int i = 0; i <= len1 - len2; i++)
+	for (int i = 0; i < len1; i++)
 	{
 		if (str1[i] == str2[0])
 		{
@@ -371,7 +370,7 @@ int Boyer_Moore2(string str1, string str2)
 	for (int i = 0; i < UCHAR_MAX; i++)
 		skip[i] = len2;
 
-	for (int i = 0; i < len2 - 1; i++)
+	for (int i = 0; i < len2; i++)
 		skip[str2[i]] = i;
 	itr = len2 - 1;
 	int cp = len2 - 1;
@@ -396,12 +395,12 @@ int Boyer_Moore2(string str1, string str2)
 		}
 		skip_temp = skip[str2[cp]];
 		if (skip_temp == len2) // 패턴에 없는 문자일경우
-			itr += skip_temp;
+			itr += len2 - cp + skip_temp - 1;
 		else
 		{
-			if (skip_temp > cp) //
+			if (skip_temp < cp) // 
 			{
-				itr += cp - skip_temp;
+				itr += len2 - skip_temp + 1;
 			}
 			else
 			{

@@ -18,12 +18,13 @@ class Tree
 public:
 	node<T> *Root = NULL;
 	Tree() {}
-	~Tree();
+//	~Tree();
 	void insert(node<T> v);
 	void Delete(node<T> v);
 	node<T> Search(node<T> *root, T data);
 	void print(node<T> *root);
 	void reset(node<T> *root);
+	int check_depth(node<T> *root, int &size);
 };
 
 #endif // !TREE_H_

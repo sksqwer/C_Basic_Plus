@@ -6,7 +6,7 @@
 
 
 #include "Stopwatch.h"
-#include "Tree.h"
+#include "Tree.cpp"
 
 using namespace std;
 
@@ -29,6 +29,9 @@ void menu(Tree<T> t)
 	int n;
 	int v;
 	T d;
+
+
+
 	while (1)
 	{
 		cout << "(1) 삽입 (2) 삭제 (3) 검색 (4) 출력 (0) 종료: ";
@@ -77,4 +80,7 @@ void menu(Tree<T> t)
 		}
 
 	}
+	int size = 0;
+	cout << t.check_depth(t.Root, size) << " " << size;
+
 }

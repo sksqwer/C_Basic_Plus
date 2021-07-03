@@ -1,9 +1,9 @@
 #include "Tree.h"
-template<typename T>
-inline Tree<T>::~Tree()
-{
-	this->reset(Root);
-}
+//template<typename T>
+//inline Tree<T>::~Tree()
+//{
+//	this->reset(Root);
+//}
 
 template<typename T>
 void Tree<T>::insert(node<T> v)
@@ -183,4 +183,22 @@ void Tree<T>::reset(node<T>* root)
 	reset(root->right);
 
 	delete root;
+}
+
+template<typename T>
+int Tree<T>::check_depth(node<T>* root, int &size)
+{
+	if (root == nullptr)
+		return 0;
+	size++;
+	int res = 1, l, r;
+	l= check_depth(root->left);
+	r= check_depth(root->right);
+
+	if (l > r)
+		res += l;
+	else
+		res += r;
+
+	return res;
 }
